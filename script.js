@@ -78,7 +78,7 @@ function winnerIs(card1, card2) {
 
 //winner takes the card and places it at the button of the deck
 function placeCardBottom(deck, card1, card2) {
-  console.log(deck, card1, card2);
+  // console.log(deck, card1, card2);
   return deck.unshift(card1, card2);
 }
 
@@ -91,11 +91,12 @@ const player2Facedown = document.querySelector(".facedownText2");
 const player1Faceup = document.querySelector(".faceupText1");
 const player2Faceup = document.querySelector(".faceupText2");
 const winLose = document.querySelector(".winLose");
+const suit = document.querySelector(".suits1");
 //player 1 button function
 function draw(event) {
   event.preventDefault();
 
-  if (player1Deck.length !== 52 && player2Deck.length !== 52) {
+  if (player1Deck.length !== 52 || player2Deck.length !== 52) {
     let tempArr1 = [];
     let tempArr2 = [];
 
@@ -111,8 +112,10 @@ function draw(event) {
     player1Faceup.textContent = player1Card.number;
     player2Faceup.textContent = player2Card.number;
 
+    //display suit
+    // suit.src = "/img/clubs.jpeg";
     //find the winner
-    if (player1Card.number == player2Card.number) {
+    if (player1Card.number === player2Card.number) {
       tempArr1 = [
         player1Card,
         dealCard(player1Deck),
@@ -139,16 +142,16 @@ function draw(event) {
       player1Deck = player1Deck.concat(tempArr1);
       placeCardBottom(player1Deck, player1Card, player2Card);
       player1Facedown.textContent = player1Deck.length;
-      winLose.textContent = "WINNER";
+      winLose.textContent = " Player 1 WINNER";
     } else {
       player2Deck = player2Deck.concat(tempArr2);
       placeCardBottom(player2Deck, player1Card, player2Card);
       player2Facedown.textContent = player2Deck.length;
-      winLose.textContent = "LOSER";
+      winLose.textContent = "Player 2 WINNER";
     }
-  } else if (player1Deck.length == 52) {
+  } else if (player1Deck.length === 52) {
     winLose.textContent = "Player 1 Wins!";
-  } else if (player2Deck.length == 52) {
+  } else if (player2Deck.length === 52) {
     winLose.textContent = "Player 2 Wins!";
   }
 }
