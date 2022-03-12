@@ -46,7 +46,6 @@ function getDeck(suits, nums) {
         suit: suits[i],
         number: nums[j],
         img: `img/52cards/${nums[j]}_of_${suits[i]}.png`,
-        // img: `img/52cards/king_of_hearts.png`,
       };
       //push card into deck
       deck.push(card);
@@ -148,8 +147,8 @@ function draw(event) {
     let player2Card = dealCard(player2Deck);
 
     //displaying the new deck count
-    player1Facedown.textContent = player1Deck.length;
-    player2Facedown.textContent = player2Deck.length;
+    // player1Facedown.textContent = player1Deck.length;
+    // player2Facedown.textContent = player2Deck.length;
 
     //displaying the dealt card face up
     player1Faceup.setAttribute("src", player1Card.img);
@@ -183,20 +182,21 @@ function draw(event) {
     if (winner.number == player1Card.number) {
       player1Deck = player1Deck.concat(tempArr1);
       placeCardBottom(player1Deck, player1Card, player2Card);
-      player1Facedown.textContent = player1Deck.length;
-      winLose.textContent = " Player 1 WON THE ROUND";
+      // player1Facedown.textContent = player1Deck.length;
+      winLose.textContent = ` ${input.value.toUpperCase()} WON THE ROUND`;
     } else {
       player2Deck = player2Deck.concat(tempArr2);
       placeCardBottom(player2Deck, player1Card, player2Card);
-      player2Facedown.textContent = player2Deck.length;
+      // player2Facedown.textContent = player2Deck.length;
       winLose.textContent = "Player 2 WON THE ROUND";
     }
   } else if (player1Deck.length === 52) {
-    winLose.textContent = "Player 1 Wins!";
+    winLose.textContent = ` ${input.value.toUpperCase()} WINS THE GAME`;
   } else if (player2Deck.length === 52) {
-    winLose.textContent = "Player 2 Wins!";
+    winLose.textContent = "Player 2 WINS THE GAME!";
   }
 }
+
 /*restart button function*/
 function restart(event) {
   event.preventDefault();
@@ -209,12 +209,12 @@ function restart(event) {
   let player1Deck = deck.slice(0, half);
 
   let player2Deck = deck.slice(-half);
-  player1Facedown.textContent = player1Deck.length;
-  player2Facedown.textContent = player2Deck.length;
+  // player1Facedown.textContent = player1Deck.length;
+  // player2Facedown.textContent = player2Deck.length;
   // player1Faceup.textContent = "Face Up Cards";
   // player2Faceup.textContent = "Face Up Cards";
-  player1Faceup.setAttribute("src");
-  player2Faceup.setAttribute("src");
+  player1Faceup.setAttribute("src", "img/52cards/red_joker.png");
+  player2Faceup.setAttribute("src", "img/52cards/red_joker.png");
   winLose.textContent = " ";
 }
 
@@ -224,21 +224,23 @@ function startGame(event) {
   console.log(input.value);
 
   playerOneName.textContent = input.value.toUpperCase();
-  input.value = firstSection.style.display = "none";
+  firstSection.style.display = "none";
   main.classList.remove("hidden");
 }
 
 //get the deck
 const deck = getDeck(suits, num);
+
 //shuffle the deck
 shuffleDeck(deck);
+
 //split the deck in half for the two players
 const half = Math.ceil(deck.length / 2);
 let player1Deck = deck.slice(0, half);
 
 let player2Deck = deck.slice(-half);
-player1Facedown.textContent = player1Deck.length;
-player2Facedown.textContent = player2Deck.length;
+// player1Facedown.textContent = player1Deck.length;
+// player2Facedown.textContent = player2Deck.length;
 
 /* Calling the functions */
 

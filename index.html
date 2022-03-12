@@ -6,15 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheet.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Ops+One&display=swap"
+      rel="stylesheet"
+    />
     <title>War Card Game</title>
   </head>
   <body>
     <!-- Front homepage to display -->
     <div class="firstSection">
-      <h1>War Card Game</h1>
+      <h1 class="header">War Card Game</h1>
       <input class="input" type="box" placeholder="Please Enter Name" />
       <p><button class="btn start">Start The Game</button></p>
-      <img class="joker" src="./img/52cards/red_joker.png" />
+      <img class="joker" src="./img/swords.webp" />
     </div>
     <div class="main-container hidden">
       <header class="title-header">
@@ -34,11 +38,11 @@
 
           <div class="facedown player2-cards">
             <!-- player 2 facedown cards container -->
-            <p class="facedownText2">facedown cards</p>
+            <img class="backDeck" src="img/backDeck.jpeg" />
           </div>
           <div class="faceup player2-cards">
             <!-- player 2 face up cards container -->
-            <img class="faceupText2" />
+            <img class="faceupText2" src="img/52cards/red_joker.png" />
           </div>
         </div>
         <div class="winLoseContainer">
@@ -50,12 +54,13 @@
           <!-- player 1 cards container -->
           <div class="facedown player1-cards">
             <!-- player 1 facedown cards container -->
-            <p class="facedownText1">facedown cards</p>
+            <!-- <p class="facedownText1">26</p> -->
+            <img class="backDeck" src="img/backDeck.jpeg" />
           </div>
           <div class="faceup player1-cards">
             <!-- player 1 face up cards container -->
             <!-- <img class="suits1"></img> -->
-            <img class="faceupText1" />
+            <img class="faceupText1" src="img/52cards/red_joker.png" />
           </div>
         </div>
       </section>
