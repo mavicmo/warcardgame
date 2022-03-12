@@ -9,6 +9,8 @@ const player1Faceup = document.querySelector(".faceupText1");
 const player2Faceup = document.querySelector(".faceupText2");
 const winLose = document.querySelector(".winLose");
 const suit = document.querySelector(".suits1");
+let input = document.querySelector(".input");
+const start = document.querySelector(".start");
 
 /*Functions*/
 
@@ -193,8 +195,6 @@ function draw(event) {
   }
 }
 
-player1Btn.addEventListener("click", draw);
-
 //restart button function
 function restart(event) {
   event.preventDefault();
@@ -214,17 +214,25 @@ function restart(event) {
   winLose.textContent = "";
 }
 
+//Start function
+function startGame() {
+  console.log(input.value);
+
+  //get the deck
+  const deck = getDeck(suits, num);
+  //shuffle the deck
+  shuffleDeck(deck);
+  //split the deck in half for the two players
+  const half = Math.ceil(deck.length / 2);
+  let player1Deck = deck.slice(0, half);
+
+  let player2Deck = deck.slice(-half);
+  player1Facedown.textContent = player1Deck.length;
+  player2Facedown.textContent = player2Deck.length;
+}
+
+/* Calling the functions */
+
+start.addEventListener("click", startGame);
+player1Btn.addEventListener("click", draw);
 restartBtn.addEventListener("click", restart);
-
-//PREP THE GAME
-//get the deck
-const deck = getDeck(suits, num);
-//shuffle the deck
-shuffleDeck(deck);
-//split the deck in half for the two players
-const half = Math.ceil(deck.length / 2);
-let player1Deck = deck.slice(0, half);
-
-let player2Deck = deck.slice(-half);
-player1Facedown.textContent = player1Deck.length;
-player2Facedown.textContent = player2Deck.length;

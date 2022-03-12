@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  /* display: none; */
 }
 
 body {
@@ -12,9 +13,28 @@ body {
     #00b2c9,
     #12ebe4
   );
+  /* display: none; */
   /* position: relative; */
 }
 
+/* first section */
+
+.firstSection {
+  width: 750px;
+  height: 1000px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.input {
+  margin: 50px 0;
+}
+
+.joker {
+  display: block;
+}
+
+/* second section */
 h1 {
   text-align: center;
   color: azure;
@@ -31,10 +51,6 @@ footer {
   /* border: 5px solid black; */
 }
 
-img {
-  height: 200px;
-}
-
 /* containers */
 
 .main-container {
@@ -42,6 +58,7 @@ img {
   height: 1000px;
   margin: 0 auto;
   /* border: 5px solid black; */
+  display: none;
 }
 
 /* players container */
@@ -142,4 +159,5 @@ img {
 }
 
 .faceupText1 {
+  height: 200px;
 }
