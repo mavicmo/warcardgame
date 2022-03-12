@@ -1,7 +1,36 @@
-//create the deck of cards
-const suits = ["diamond", "heart", "spade", "club"];
-const num = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+/*JavaScript for the War Card Game (Project 1)*/
 
+//const all the classes from the html file to js
+const restartBtn = document.querySelector(".restart");
+const player1Btn = document.querySelector(".player1Btn");
+const player1Facedown = document.querySelector(".facedownText1");
+const player2Facedown = document.querySelector(".facedownText2");
+const player1Faceup = document.querySelector(".faceupText1");
+const player2Faceup = document.querySelector(".faceupText2");
+const winLose = document.querySelector(".winLose");
+const suit = document.querySelector(".suits1");
+
+/*Functions*/
+
+//create the deck of cards
+const suits = ["diamonds", "hearts", "spades", "clubs"];
+const num = [
+  "ace",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "jack",
+  "queen",
+  "king",
+];
+
+//function to build the deck
 function getDeck(suits, nums) {
   let deck = [];
 
@@ -11,6 +40,8 @@ function getDeck(suits, nums) {
       let card = {
         suit: suits[i],
         number: nums[j],
+        img: `img/52cards/${nums[j]}_of_${suits[i]}.png`,
+        // img: `img/52cards/king_of_hearts.png`,
       };
       //push card into deck
       deck.push(card);
@@ -20,7 +51,7 @@ function getDeck(suits, nums) {
   return deck;
 }
 
-//shuffle the deck of cards
+//function to shuffle the deck of cards
 function shuffleDeck(deck) {
   let currIndex = deck.length,
     randomIndex;
@@ -40,31 +71,47 @@ function dealCard(deck) {
   return deck.pop();
 }
 
+function getValue(value) {
+  if (value == "ace") {
+    value = 1;
+  } else if (value == "jack") {
+    value = 11;
+  } else if (value == "queen") {
+    value = 12;
+  } else if (value == "king") {
+    value = 13;
+  }
+  return value;
+}
+
 //get the winner between the two cards
 function winnerIs(card1, card2) {
   //temp values to hold the card number
   let value1 = card1.number;
   let value2 = card2.number;
 
-  //give values to the letters
-  if (value1 == "A") {
-    value1 = 1;
-  } else if (value1 == "J") {
-    value1 = 11;
-  } else if (value1 == "Q") {
-    value1 = 12;
-  } else if (value1 == "K") {
-    value1 = 13;
-  }
-  if (value2 == "A") {
-    value2 = 1;
-  } else if (value2 == "J") {
-    value2 = 11;
-  } else if (value2 == "Q") {
-    value2 = 12;
-  } else if (value2 == "K") {
-    value2 = 13;
-  }
+  value1 = getValue(value1);
+  value2 = getValue(value2);
+
+  // //give values to the letters
+  // if (value1 == "ace") {
+  //   value1 = 1;
+  // } else if (value1 == "jack") {
+  //   value1 = 11;
+  // } else if (value1 == "queen") {
+  //   value1 = 12;
+  // } else if (value1 == "king") {
+  //   value1 = 13;
+  // }
+  // if (value2 == "ace") {
+  //   value2 = 1;
+  // } else if (value2 == "jack") {
+  //   value2 = 11;
+  // } else if (value2 == "queen") {
+  //   value2 = 12;
+  // } else if (value2 == "king") {
+  //   value2 = 13;
+  // }
 
   //find the greater value between card1 and card2
   let winnerIs = Math.max(value1, value2);
@@ -82,16 +129,6 @@ function placeCardBottom(deck, card1, card2) {
   return deck.unshift(card1, card2);
 }
 
-//const all the classes from the html file to js
-const restartBtn = document.querySelector(".restart");
-// const player2Btn = document.querySelector(".player2Btn");
-const player1Btn = document.querySelector(".player1Btn");
-const player1Facedown = document.querySelector(".facedownText1");
-const player2Facedown = document.querySelector(".facedownText2");
-const player1Faceup = document.querySelector(".faceupText1");
-const player2Faceup = document.querySelector(".faceupText2");
-const winLose = document.querySelector(".winLose");
-const suit = document.querySelector(".suits1");
 //player 1 button function
 function draw(event) {
   event.preventDefault();
@@ -109,8 +146,8 @@ function draw(event) {
     player2Facedown.textContent = player2Deck.length;
 
     //displaying the dealt card face up
-    player1Faceup.textContent = player1Card.number;
-    player2Faceup.textContent = player2Card.number;
+    player1Faceup.setAttribute("src", player1Card.img);
+    player2Faceup.setAttribute("src", player2Card.img);
 
     //display suit
     // suit.src = "/img/clubs.jpeg";
@@ -142,12 +179,12 @@ function draw(event) {
       player1Deck = player1Deck.concat(tempArr1);
       placeCardBottom(player1Deck, player1Card, player2Card);
       player1Facedown.textContent = player1Deck.length;
-      winLose.textContent = " Player 1 WINNER";
+      winLose.textContent = " Player 1 WON THE ROUND";
     } else {
       player2Deck = player2Deck.concat(tempArr2);
       placeCardBottom(player2Deck, player1Card, player2Card);
       player2Facedown.textContent = player2Deck.length;
-      winLose.textContent = "Player 2 WINNER";
+      winLose.textContent = "Player 2 WON THE ROUND";
     }
   } else if (player1Deck.length === 52) {
     winLose.textContent = "Player 1 Wins!";

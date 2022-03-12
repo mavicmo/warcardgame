@@ -20,6 +20,7 @@ h1 {
   color: azure;
   margin-top: 50px;
   margin-bottom: 15px;
+  text-decoration: ;
 }
 
 footer {
@@ -29,6 +30,11 @@ footer {
   /* position: absolute; */
   /* border: 5px solid black; */
 }
+
+img {
+  height: 200px;
+}
+
 /* containers */
 
 .main-container {
@@ -120,18 +126,20 @@ footer {
   /* border: 5px solid black;
   height: 200px;
   width: 150px; */
+  /* background-color: white; */
 }
 
 .facedownText2,
-.facedownText1,
-.faceupText1,
-.faceupText2 {
+.facedownText1 {
   text-align: center;
   margin-top: 75px;
-  color: white;
+  color: black;
   font-size: 25px;
 }
 
 .suits1 {
   /* border: 5px solid black; */
+}
+
+.faceupText1 {
 }
