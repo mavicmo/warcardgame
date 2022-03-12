@@ -11,10 +11,13 @@ const winLose = document.querySelector(".winLose");
 const suit = document.querySelector(".suits1");
 let input = document.querySelector(".input");
 const start = document.querySelector(".start");
+const firstSection = document.querySelector(".firstSection");
+const main = document.querySelector(".main-container");
+const playerOneName = document.querySelector(".player1");
 
 /*Functions*/
 
-//create the deck of cards
+/* Create the deck of cards */
 const suits = ["diamonds", "hearts", "spades", "clubs"];
 const num = [
   "ace",
@@ -32,7 +35,7 @@ const num = [
   "king",
 ];
 
-//function to build the deck
+/* Function to build the deck */
 function getDeck(suits, nums) {
   let deck = [];
 
@@ -53,7 +56,7 @@ function getDeck(suits, nums) {
   return deck;
 }
 
-//function to shuffle the deck of cards
+/* Function to shuffle the deck of cards */
 function shuffleDeck(deck) {
   let currIndex = deck.length,
     randomIndex;
@@ -68,11 +71,12 @@ function shuffleDeck(deck) {
   return deck;
 }
 
-//deal a card
+/* Function to deal a card */
 function dealCard(deck) {
   return deck.pop();
 }
 
+/* Function to change the value of ace, jack, queen, and king into numbers */
 function getValue(value) {
   if (value == "ace") {
     value = 1;
@@ -125,13 +129,13 @@ function winnerIs(card1, card2) {
   }
 }
 
-//winner takes the card and places it at the button of the deck
+/*winner takes the card and places it at the button of the deck*/
 function placeCardBottom(deck, card1, card2) {
   // console.log(deck, card1, card2);
   return deck.unshift(card1, card2);
 }
 
-//player 1 button function
+/* Draw function button */
 function draw(event) {
   event.preventDefault();
 
@@ -151,9 +155,8 @@ function draw(event) {
     player1Faceup.setAttribute("src", player1Card.img);
     player2Faceup.setAttribute("src", player2Card.img);
 
-    //display suit
-    // suit.src = "/img/clubs.jpeg";
-    //find the winner
+    /* Find the winner*/
+
     if (player1Card.number === player2Card.number) {
       tempArr1 = [
         player1Card,
@@ -194,8 +197,7 @@ function draw(event) {
     winLose.textContent = "Player 2 Wins!";
   }
 }
-
-//restart button function
+/*restart button function*/
 function restart(event) {
   event.preventDefault();
   //get the deck
@@ -209,27 +211,34 @@ function restart(event) {
   let player2Deck = deck.slice(-half);
   player1Facedown.textContent = player1Deck.length;
   player2Facedown.textContent = player2Deck.length;
-  player1Faceup.textContent = "Face Up Cards";
-  player2Faceup.textContent = "Face Up Cards";
-  winLose.textContent = "";
+  // player1Faceup.textContent = "Face Up Cards";
+  // player2Faceup.textContent = "Face Up Cards";
+  player1Faceup.setAttribute("src");
+  player2Faceup.setAttribute("src");
+  winLose.textContent = " ";
 }
 
-//Start function
-function startGame() {
+/* Start Function */
+function startGame(event) {
+  event.preventDefault();
   console.log(input.value);
 
-  //get the deck
-  const deck = getDeck(suits, num);
-  //shuffle the deck
-  shuffleDeck(deck);
-  //split the deck in half for the two players
-  const half = Math.ceil(deck.length / 2);
-  let player1Deck = deck.slice(0, half);
-
-  let player2Deck = deck.slice(-half);
-  player1Facedown.textContent = player1Deck.length;
-  player2Facedown.textContent = player2Deck.length;
+  playerOneName.textContent = input.value.toUpperCase();
+  input.value = firstSection.style.display = "none";
+  main.classList.remove("hidden");
 }
+
+//get the deck
+const deck = getDeck(suits, num);
+//shuffle the deck
+shuffleDeck(deck);
+//split the deck in half for the two players
+const half = Math.ceil(deck.length / 2);
+let player1Deck = deck.slice(0, half);
+
+let player2Deck = deck.slice(-half);
+player1Facedown.textContent = player1Deck.length;
+player2Facedown.textContent = player2Deck.length;
 
 /* Calling the functions */
 
