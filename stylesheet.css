@@ -73,6 +73,7 @@ footer {
   height: 1000px;
   margin: 0 auto;
   /* border: 5px solid black; */
+  font-family: "Black Ops One", cursive;
 }
 .hidden {
   display: none;
@@ -90,7 +91,7 @@ footer {
 
 /* player 2 */
 .two-container {
-  /*  */
+  font-family: "Black Ops One", cursive;
 }
 
 /* player 1 */
@@ -166,14 +167,16 @@ footer {
   /* background-color: white; */
 }
 
-/* .facedownText2,
-.facedownText1 {
-  justify-content: flex-end;
+.facedownText1,
+.facedownText2 {
+  display: flexbox;
+  text-align: center;
   margin-top: 75px;
-  color: black;
+  color: whitesmoke;
   font-size: 25px;
-  border: 5px solid black;
-} */
+
+  font-family: "Black Ops One", cursive;
+}
 
 .suits1 {
   /* border: 5px solid black; */
@@ -187,4 +190,9 @@ footer {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+.player1 {
+  margin-bottom: 10px;
+  font-family: "Black Ops One", cursive;
 }
