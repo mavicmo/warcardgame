@@ -42,9 +42,9 @@ const num = [
   "2",
   "2",
   "2",
-  "2",
-  "2",
-  "2",
+  "6",
+  "5",
+  "3",
   // "8",
   // "9",
   // "10",
@@ -75,6 +75,7 @@ function getDeck(suits, nums) {
 
 /* Function to shuffle the deck of cards */
 function shuffleDeck(deck) {
+  //recieved
   let currIndex = deck.length,
     randomIndex;
 
@@ -254,33 +255,32 @@ function startGame(event) {
   firstSection.style.display = "none";
   main.classList.remove("hidden");
 }
+/*END OF FUNCTIONS*/
 
 //get the deck
 const deck = getDeck(suits, num);
-
 //shuffle the deck
 shuffleDeck(deck);
-
 //split the deck in half for the two players
 const half = Math.ceil(deck.length / 2);
 let player1Deck = deck.slice(0, half);
-
 let player2Deck = deck.slice(-half);
 player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
 player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
 
 /* Calling the functions */
-
 //Start the game
 start.addEventListener("click", startGame);
 
 //main btn to play the game
-if (player1Deck.length !== 52 && player2Deck.length !== 52) {
+if (player1Deck.length !== 28 && player2Deck.length !== 28) {
   player1Btn.addEventListener("click", draw);
-} else if (player1Deck.length === 52) {
+  console.log(player1Deck.length, player1Deck.length);
+}
+if (player1Deck.length === 28) {
   console.log(`winner 1`);
   winLose.textContent = ` ${input.value.toUpperCase()} WINS THE GAME`;
-} else if (player2Deck.length === 52) {
+} else if (player2Deck.length === 28) {
   console.log(`winner 2`);
   winLose.textContent = "Player 2 WINS THE GAME!";
 }
