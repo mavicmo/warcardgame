@@ -1,22 +1,4 @@
 /*JavaScript for the War Card Game (Project 1)*/
-
-//const all the classes from the html file to js
-const restartBtn = document.querySelector(".restart");
-const player1Btn = document.querySelector(".player1Btn");
-const player1Facedown = document.querySelector(".facedownText1");
-const player2Facedown = document.querySelector(".facedownText2");
-const player1Faceup = document.querySelector(".faceupText1");
-const player2Faceup = document.querySelector(".faceupText2");
-const winLose = document.querySelector(".winLose");
-const suit = document.querySelector(".suits1");
-let input = document.querySelector(".input");
-const start = document.querySelector(".start");
-const firstSection = document.querySelector(".firstSection");
-const main = document.querySelector(".main-container");
-const playerOneName = document.querySelector(".player1");
-
-/*Functions*/
-
 /* Create the deck of cards */
 // const suits = ["diamonds", "hearts", "spades", "clubs"];
 // const num = [
@@ -36,12 +18,12 @@ const playerOneName = document.querySelector(".player1");
 // ];
 
 /* Test code for the war feature */
-const suits = ["diamonds", "diamonds", "spades", "spades"];
+const suits = ["spades", "spades"];
 const num = [
   "ace",
   "2",
-  "2",
-  "2",
+  "9",
+  "10",
   "6",
   "5",
   "3",
@@ -52,6 +34,36 @@ const num = [
   // "queen",
   // "king",
 ];
+//const all the classes from the html file to js
+const restartBtn = document.querySelector(".restart");
+const player1Btn = document.querySelector(".player1Btn");
+const player1Facedown = document.querySelector(".facedownText1");
+const player2Facedown = document.querySelector(".facedownText2");
+const player1Faceup = document.querySelector(".faceupText1");
+const player2Faceup = document.querySelector(".faceupText2");
+const winLose = document.querySelector(".winLose");
+const suit = document.querySelector(".suits1");
+let input = document.querySelector(".input");
+const start = document.querySelector(".start");
+const firstSection = document.querySelector(".firstSection");
+const main = document.querySelector(".main-container");
+const playerOneName = document.querySelector(".player1");
+const win = document.querySelector(".win");
+const winner = document.querySelector(".winnerIs");
+const playAgain = document.querySelector(".playAgain");
+
+//get the deck
+let deck = getDeck(suits, num);
+//shuffle the deck
+shuffleDeck(deck);
+//split the deck in half for the two players
+let half = Math.ceil(deck.length / 2);
+let player1Deck = deck.slice(0, half);
+let player2Deck = deck.slice(-half);
+player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
+player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
+
+/*Functions*/
 
 /* Function to build the deck */
 function getDeck(suits, nums) {
@@ -75,7 +87,7 @@ function getDeck(suits, nums) {
 
 /* Function to shuffle the deck of cards */
 function shuffleDeck(deck) {
-  //recieved
+  //recieved from overflow -> https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   let currIndex = deck.length,
     randomIndex;
 
@@ -129,7 +141,6 @@ function winnerIs(card1, card2) {
 
 /*winner takes the card and places it at the button of the deck*/
 function placeCardBottom(deck, card1, card2) {
-  // console.log(deck, card1, card2);
   return deck.unshift(card1, card2);
 }
 
@@ -144,6 +155,8 @@ function draw(event) {
   let player1Card = dealCard(player1Deck);
   let player2Card = dealCard(player2Deck);
 
+  console.log(player1Card);
+  console.log(player2Card);
   // displaying the new deck count
   player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
   player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
@@ -168,13 +181,10 @@ function draw(event) {
     } else if (player1Deck.length > 1) {
       tempArr1.push(dealCard(player1Deck));
     }
-    console.log(tempArr1);
 
     player1Card = dealCard(player1Deck);
 
     player1Faceup.setAttribute("src", player1Card.img);
-
-    console.log(`card being delt: ${player1Card.number}`);
 
     player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
     player1Faceup.textContent = player1Card.number;
@@ -192,59 +202,57 @@ function draw(event) {
       tempArr2.push(dealCard(player2Deck));
     }
 
-    console.log(tempArr2);
-
     player2Card = dealCard(player2Deck);
     player2Faceup.setAttribute("src", player2Card.img);
-    console.log(`card being delt: ${player2Card.number}`);
+
     player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
     player2Faceup.textContent = player2Card.number;
   }
-  console.log(`${tempArr1}`);
-  console.log(`${tempArr2}`);
+
   const winner = winnerIs(player1Card, player2Card);
-  console.log(winner);
-  console.log(`deck1 : ${player1Deck.length}`);
-  console.log(`deck2 : ${player2Deck.length}`);
 
   if (winner.number == player1Card.number) {
-    console.log(tempArr1);
     player1Deck = tempArr1.concat(tempArr2, player1Deck);
 
     placeCardBottom(player1Deck, player1Card, player2Card);
-    console.log(`deck1 : ${player1Deck.length}`);
-    console.log(`deck2 : ${player2Deck.length}`);
+
     player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
     winLose.textContent = ` ${input.value.toUpperCase()} WON THE ROUND`;
   } else {
-    console.log(tempArr2);
     player2Deck = tempArr2.concat(tempArr1, player2Deck);
     placeCardBottom(player2Deck, player1Card, player2Card);
-    console.log(`deck1 : ${player1Deck.length}`);
-    console.log(`deck2 : ${player2Deck.length}`);
+
     player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
     winLose.textContent = "Player 2 WON THE ROUND";
   }
+  checkWin();
+  console.log(player1Deck);
+  console.log(player2Deck);
 }
 
 /*restart button function*/
 function restart(event) {
   event.preventDefault();
   //get the deck
-  const deck = getDeck(suits, num);
+  deck = getDeck(suits, num);
   //shuffle the deck
   shuffleDeck(deck);
   //split the deck in half for the two players
-  const half = Math.ceil(deck.length / 2);
-  let player1Deck = deck.slice(0, half);
-
-  let player2Deck = deck.slice(-half);
+  half = Math.ceil(deck.length / 2);
+  player1Deck = deck.slice(0, half);
+  player2Deck = deck.slice(-half);
   player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
   player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
 
   player1Faceup.setAttribute("src", "img/52cards/red_joker.png");
   player2Faceup.setAttribute("src", "img/52cards/red_joker.png");
   winLose.textContent = " ";
+
+  main.classList.remove("hidden");
+  win.classList.add("hidden");
+  console.log(`testing to work`);
+  console.log(player1Deck);
+  console.log(player2Deck);
 }
 
 /* Start Function */
@@ -255,33 +263,32 @@ function startGame(event) {
   firstSection.style.display = "none";
   main.classList.remove("hidden");
 }
+
+function checkWin() {
+  if (player1Deck.length === 14) {
+    console.log(`it worked here`);
+    winner.textContent = `${input.value.toUpperCase()} WON THE WAR`;
+    main.classList.add("hidden");
+    win.classList.remove("hidden");
+    playAgain.addEventListener("click", restart);
+  } else if (player2Deck.length === 14) {
+    winner.textContent = `PLAYER 2 WON THE WAR`;
+    console.log(`it worked here`);
+    main.classList.add("hidden");
+    win.classList.remove("hidden");
+    playAgain.addEventListener("click", restart);
+  }
+}
 /*END OF FUNCTIONS*/
 
-//get the deck
-const deck = getDeck(suits, num);
-//shuffle the deck
-shuffleDeck(deck);
-//split the deck in half for the two players
-const half = Math.ceil(deck.length / 2);
-let player1Deck = deck.slice(0, half);
-let player2Deck = deck.slice(-half);
-player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
-player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
-
 /* Calling the functions */
+
 //Start the game
 start.addEventListener("click", startGame);
 
 //main btn to play the game
-if (player1Deck.length !== 28 && player2Deck.length !== 28) {
-  player1Btn.addEventListener("click", draw);
-  console.log(player1Deck.length, player1Deck.length);
-}
-if (player1Deck.length === 28) {
-  console.log(`winner 1`);
-  winLose.textContent = ` ${input.value.toUpperCase()} WINS THE GAME`;
-} else if (player2Deck.length === 28) {
-  console.log(`winner 2`);
-  winLose.textContent = "Player 2 WINS THE GAME!";
-}
+player1Btn.addEventListener("click", draw);
+//reset the game
 restartBtn.addEventListener("click", restart);
+//play again after winner is determined
+playAgain.addEventListener("click", restart);
