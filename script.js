@@ -258,12 +258,12 @@ function startGame(event) {
 }
 
 function checkWin() {
-  if (player1Deck.length === 14) {
+  if (player1Deck.length === 52) {
     winner.textContent = `${input.value.toUpperCase()} WON THE WAR`;
     main.classList.add("hidden");
     win.classList.remove("hidden");
     playAgain.addEventListener("click", restart);
-  } else if (player2Deck.length === 14) {
+  } else if (player2Deck.length === 52) {
     winner.textContent = `PLAYER 2 WON THE WAR`;
 
     main.classList.add("hidden");
