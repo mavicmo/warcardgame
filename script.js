@@ -1,4 +1,5 @@
 /*JavaScript for the War Card Game (Project 1)*/
+
 /* Create the deck of cards */
 const suits = ["diamonds", "hearts", "spades", "clubs"];
 const num = [
@@ -88,7 +89,7 @@ function getDeck(suits, nums) {
 
 /* Function to shuffle the deck of cards */
 function shuffleDeck(deck) {
-  //recieved from overflow -> https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  //recieved from StackOverflow -> https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   let currIndex = deck.length,
     randomIndex;
 
@@ -210,17 +211,15 @@ function draw(event) {
 
   const winner = winnerIs(player1Card, player2Card);
 
+  //Check if the winning card matches which player card
   if (winner.number == player1Card.number) {
     player1Deck = tempArr1.concat(tempArr2, player1Deck);
-
     placeCardBottom(player1Deck, player1Card, player2Card);
-
     player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
-    winLose.textContent = ` ${input.value.toUpperCase()} WON THE ROUND`;
+    winLose.textContent = `${input.value.toUpperCase()} WON THE ROUND`;
   } else {
     player2Deck = tempArr2.concat(tempArr1, player2Deck);
     placeCardBottom(player2Deck, player1Card, player2Card);
-
     player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
     winLose.textContent = "Player 2 WON THE ROUND";
   }
