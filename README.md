@@ -30,7 +30,7 @@ There will be a display of the winner when its determined.
 # Screenshots
 
 ![Alt text](img/screenshot1.png "Optional Title")
-![Alt text](img/screenshot2.png "Optional Title")
+![Alt text](img/Screenshot2.png "Optional Title")
 ![Alt text](img/screenshot3.png "Optional Title")
 
 # Wire Frame
