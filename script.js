@@ -1,39 +1,40 @@
 /*JavaScript for the War Card Game (Project 1)*/
 /* Create the deck of cards */
-// const suits = ["diamonds", "hearts", "spades", "clubs"];
-// const num = [
-//   "ace",
-//   "2",
-//   "3",
-//   "4",
-//   "5",
-//   "6",
-//   "7",
-//   "8",
-//   "9",
-//   "10",
-//   "jack",
-//   "queen",
-//   "king",
-// ];
-
-/* Test code for the war feature */
-const suits = ["spades", "spades"];
+const suits = ["diamonds", "hearts", "spades", "clubs"];
 const num = [
   "ace",
   "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
   "9",
   "10",
-  "6",
-  "5",
-  "3",
-  // "8",
-  // "9",
-  // "10",
-  // "jack",
-  // "queen",
-  // "king",
+  "jack",
+  "queen",
+  "king",
 ];
+
+// /* Test code for the war feature */
+// const suits = ["spades", "spades"];
+// const num = [
+//   "ace",
+//   "2",
+//   "9",
+//   "10",
+//   "6",
+//   "5",
+//   "3",
+//   // "8",
+//   // "9",
+//   // "10",
+//   // "jack",
+//   // "queen",
+//   // "king",
+// ];
+
 //const all the classes from the html file to js
 const restartBtn = document.querySelector(".restart");
 const player1Btn = document.querySelector(".player1Btn");
@@ -155,8 +156,6 @@ function draw(event) {
   let player1Card = dealCard(player1Deck);
   let player2Card = dealCard(player2Deck);
 
-  console.log(player1Card);
-  console.log(player2Card);
   // displaying the new deck count
   player1Facedown.textContent = `Deck Count: ${player1Deck.length}`;
   player2Facedown.textContent = `Deck Count: ${player2Deck.length}`;
@@ -226,8 +225,6 @@ function draw(event) {
     winLose.textContent = "Player 2 WON THE ROUND";
   }
   checkWin();
-  console.log(player1Deck);
-  console.log(player2Deck);
 }
 
 /*restart button function*/
@@ -250,9 +247,6 @@ function restart(event) {
 
   main.classList.remove("hidden");
   win.classList.add("hidden");
-  console.log(`testing to work`);
-  console.log(player1Deck);
-  console.log(player2Deck);
 }
 
 /* Start Function */
@@ -266,14 +260,13 @@ function startGame(event) {
 
 function checkWin() {
   if (player1Deck.length === 14) {
-    console.log(`it worked here`);
     winner.textContent = `${input.value.toUpperCase()} WON THE WAR`;
     main.classList.add("hidden");
     win.classList.remove("hidden");
     playAgain.addEventListener("click", restart);
   } else if (player2Deck.length === 14) {
     winner.textContent = `PLAYER 2 WON THE WAR`;
-    console.log(`it worked here`);
+
     main.classList.add("hidden");
     win.classList.remove("hidden");
     playAgain.addEventListener("click", restart);
